@@ -3,7 +3,6 @@ package com.shejiaomao.weibo;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
-
 import net.dev123.yibo.R;
 import android.app.AlarmManager;
 import android.app.Application;
@@ -16,16 +15,15 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-
 import com.cattong.commons.http.HttpRequestHelper;
 import com.cattong.commons.util.StringUtil;
 import com.cattong.commons.util.TimeSpanUtil;
 import com.shejiaomao.common.CompatibilityUtil;
-import com.shejiaomao.common.HardwareUtil;
 import com.shejiaomao.common.ImageQuality;
 import com.shejiaomao.common.NetType;
 import com.shejiaomao.common.NetUtil;
@@ -405,7 +403,7 @@ public class SheJiaoMaoApplication extends Application {
 	}
 
 	private void initPrefs() {
-		String deviceId = HardwareUtil.getDeviceId(this);
+		String deviceId = Settings.Secure.getString( this.getContentResolver(), Settings.Secure.ANDROID_ID );
 		
 		SharedPreferences prefs = this.getSharedPreferences(
 				Constants.PREFS_NAME_APP_SETTING, 0);
