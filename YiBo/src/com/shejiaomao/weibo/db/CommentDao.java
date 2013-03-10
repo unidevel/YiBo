@@ -75,7 +75,7 @@ public class CommentDao extends BaseDao<Comment> {
 		values.put("Is_Favorated", comment.isFavorited() ? 1 : 0);
 		values.put("Service_Provider", comment.getServiceProvider().getSpNo());
 
-		values.put("Account_ID", account == null ? -1 : account.getAccountId());
+		values.put("Account_ID", account == null ? -1L : account.getAccountId());
 		if (comment instanceof LocalComment) {
 			values.put("Is_Divider", ((LocalComment)comment).isDivider() ? 1 : 0);
 		} else {

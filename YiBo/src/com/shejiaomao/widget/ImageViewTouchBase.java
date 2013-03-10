@@ -133,7 +133,7 @@ public abstract class ImageViewTouchBase extends ImageView {
 
     // This function changes bitmap, reset base matrix according to the size
     // of the bitmap, and optionally reset the supplementary matrix.
-    public void setImageBitmapResetBase(final Bitmap bitmap, final int rotation,
+    public void setImageBitmapResetBase(final Bitmap bitmap, final float rotation,
             final boolean resetSupp) {
         final int viewWidth = getWidth();
 
@@ -147,7 +147,7 @@ public abstract class ImageViewTouchBase extends ImageView {
         }
 
         if (bitmap != null) {
-        	setImageBitmap(bitmap, rotation);
+        	setImageBitmap(bitmap, (int)rotation);
             getProperBaseMatrix(mBaseMatrix);
         } else {
             mBaseMatrix.reset();
@@ -434,7 +434,7 @@ public abstract class ImageViewTouchBase extends ImageView {
         center(true, true);
     }
 
-	public int getRotation() {
+	public float getRotation() {
 		return mRotation;
 	}
 

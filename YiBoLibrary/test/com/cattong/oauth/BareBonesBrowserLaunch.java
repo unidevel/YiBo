@@ -3,7 +3,7 @@ package com.cattong.oauth;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 
 /**
  * <b>Bare Bones Browser Launch for Java</b><br>
@@ -63,7 +63,7 @@ public class BareBonesBrowserLaunch {
                      throw new Exception(Arrays.toString(browsers));
              }
          } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, errMsg + "\n" + e.toString());
+         //   JOptionPane.showMessageDialog(null, errMsg + "\n" + e.toString());
          }
       }
    }

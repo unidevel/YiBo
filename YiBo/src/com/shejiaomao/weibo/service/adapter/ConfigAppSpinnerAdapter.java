@@ -51,7 +51,7 @@ public class ConfigAppSpinnerAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		return apps == null ? 0 : apps.get(position).getAppId();
+		return apps == null ? 0L : apps.get(position).getAppId();
 	}
 
 	@Override

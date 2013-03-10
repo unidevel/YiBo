@@ -83,7 +83,7 @@ public class StatusDao extends BaseDao<Status> {
 			values.put("Geo", location.getLatitude() + "," + location.getLongitude());
 		}
 
-		long accountId = (account == null ? -1 : account.getAccountId());
+		long accountId = (account == null ? -1L: account.getAccountId());
 		values.put("Account_ID", accountId);
 		if (status instanceof LocalStatus) {
 			values.put("Is_Divider", ((LocalStatus)status).isDivider() ? 1 : 0);
