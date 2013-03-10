@@ -1,7 +1,7 @@
 package com.shejiaomao.weibo.activity;
 
 import java.io.File;
-
+import net.dev123.yibo.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -15,12 +15,9 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import net.dev123.yibo.R;
 import com.shejiaomao.weibo.SheJiaoMaoApplication;
 import com.shejiaomao.weibo.common.theme.ThemeUtil;
 import com.shejiaomao.weibo.service.listener.ImageViewerSaveClickListener;
-import com.umeng.analytics.MobclickAgent;
 
 public class ImageWebViewerActivity extends Activity {
 	@SuppressWarnings("unused")
@@ -154,12 +151,10 @@ public class ImageWebViewerActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		MobclickAgent.onResume(this);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		MobclickAgent.onPause(this);
 	}
 }

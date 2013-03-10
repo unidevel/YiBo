@@ -1,15 +1,15 @@
 package com.shejiaomao.weibo.activity;
 
 import java.util.List;
-
+import net.dev123.yibo.R;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,17 +27,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.LinearLayout.LayoutParams;
-
 import com.cattong.commons.http.HttpRequestHelper;
 import com.cattong.commons.util.ListUtil;
 import com.cattong.entity.Status;
-import net.dev123.yibo.R;
 import com.shejiaomao.weibo.SheJiaoMaoApplication;
 import com.shejiaomao.weibo.common.CacheManager;
 import com.shejiaomao.weibo.common.Constants;
@@ -57,7 +55,6 @@ import com.shejiaomao.weibo.service.listener.HomePageScreenToggleClickListener.S
 import com.shejiaomao.weibo.service.task.InitAppTask;
 import com.shejiaomao.weibo.service.task.VerifyCredentialsTask;
 import com.shejiaomao.weibo.widget.Skeleton;
-import com.umeng.analytics.MobclickAgent;
 
 public class HomePageActivity extends Activity {
 	private static final String TAG = HomePageActivity.class.getSimpleName();
@@ -67,14 +64,14 @@ public class HomePageActivity extends Activity {
 	private Skeleton skeleton = null;
 	private ScreenToggle toggle = null;
 	
-	private GestureDetector detector;//触摸监听实例
+	private GestureDetector detector;// 触摸监听实例
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		sheJiaoMao = (SheJiaoMaoApplication) getApplication();
 
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onCreate……" + ", Intent : " + getIntent());
+			Log.v( TAG, "onCreate……" + ", Intent : " + getIntent() );
 		}
 
 		boolean isStartup = getIntent().getBooleanExtra("START", false);
@@ -92,7 +89,7 @@ public class HomePageActivity extends Activity {
 	public void initComponents() {
 		skeleton = new Skeleton(this);
         
-		//启动service和注册接收器
+		// 启动service和注册接收器
 		Intent serviceIntent = new Intent(this, AutoUpdateService.class);
 		startService(serviceIntent);
 	}
@@ -135,9 +132,8 @@ public class HomePageActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		MobclickAgent.onResume(this);
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onResume……" + ", Skeleton is " + skeleton);
+			Log.v( TAG, "onResume……" + ", Skeleton is " + skeleton );
 		}
 	}
 
@@ -145,7 +141,7 @@ public class HomePageActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onActivityResult……" + ", Skeleton is " + skeleton);
+			Log.v( TAG, "onActivityResult……" + ", Skeleton is " + skeleton );
 		}
 
 		Bundle bundle = null;
@@ -198,7 +194,7 @@ public class HomePageActivity extends Activity {
 			} else {
 				this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 			}
-			//语言设置
+				// 语言设置
 			Configuration config = new Configuration();
 		    config.locale = GlobalVars.LOCALE;
 		    getResources().updateConfiguration(config, null);
@@ -206,7 +202,7 @@ public class HomePageActivity extends Activity {
 			ListView lvMicroBlog = (ListView)findViewById(R.id.lvMicroBlog);
 			if (lvMicroBlog != null) {
 				lvMicroBlog.setFastScrollEnabled(sheJiaoMao.isSliderEnabled());
-				//字体改变时更新;
+					// 字体改变时更新;
 				ListAdapter adapter = lvMicroBlog.getAdapter();
 				CacheAdapter<?> cacheAdapter = AdapterUtil.getCacheAdapter(adapter);
 				if (cacheAdapter != null) {
@@ -327,7 +323,7 @@ public class HomePageActivity extends Activity {
 	protected void onNewIntent(Intent newIntent) {
 		super.onNewIntent(newIntent);
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onNewIntent……" + ", Intent : " + newIntent);
+			Log.v( TAG, "onNewIntent……" + ", Intent : " + newIntent );
 		}
 
 		LocalAccount account = (LocalAccount)newIntent.getSerializableExtra("ACCOUNT");
@@ -337,7 +333,7 @@ public class HomePageActivity extends Activity {
 		}
 		int contentType = newIntent.getIntExtra("CONTENT_TYPE", Skeleton.TYPE_MY_HOME);
 
-		sheJiaoMao.setCurrentAccount(account); // 设置当前帐号
+		sheJiaoMao.setCurrentAccount( account ); // 设置当前帐号
 		skeleton.setCurrentAccount(account, true);
 		skeleton.setContentType(contentType);
 
@@ -346,7 +342,7 @@ public class HomePageActivity extends Activity {
 		if (lvMicroBlog != null) {
 			ListAdapter adapter = lvMicroBlog.getAdapter();
 			CacheAdapter<?> cacheAdapter = AdapterUtil.getCacheAdapter(adapter);
-			//有可能处于分组中
+			// 有可能处于分组中
 			if (contentType == Skeleton.TYPE_MY_HOME
 				&& cacheAdapter instanceof GroupStatusesListAdapter) {
 				Cache cache = CacheManager.getInstance().getCache(account);
@@ -375,16 +371,15 @@ public class HomePageActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		MobclickAgent.onPause(this);
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onPause……" + ", Skeleton is " + skeleton);
+			Log.v( TAG, "onPause……" + ", Skeleton is " + skeleton );
 		}
 	}
 
 	protected void onStop() {
 		super.onStop();
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onStop……" + ", Skeleton is " + skeleton);
+			Log.v( TAG, "onStop……" + ", Skeleton is " + skeleton );
 		}
 		if (!sheJiaoMao.isShowStatusIcon()) {
 			return;
@@ -425,7 +420,7 @@ public class HomePageActivity extends Activity {
 		NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.cancel(R.string.app_name);
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onStart……" + ", Skeleton is " + skeleton);
+			Log.v( TAG, "onStart……" + ", Skeleton is " + skeleton );
 		}
 	}
 
@@ -474,7 +469,7 @@ public class HomePageActivity extends Activity {
 		}
 
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onSaveInstanceState……" + ", Skeleton is " + skeleton);
+			Log.v( TAG, "onSaveInstanceState……" + ", Skeleton is " + skeleton );
 		}
 	}
 
@@ -482,7 +477,7 @@ public class HomePageActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onDestroy……" + ", Skeleton is " + skeleton);
+			Log.v( TAG, "onDestroy……" + ", Skeleton is " + skeleton );
 		}
 	}
 
@@ -514,7 +509,6 @@ public class HomePageActivity extends Activity {
         	skeleton.reclaim();
         }
 		CacheManager.getInstance().reclaim(ReclaimLevel.MODERATE);
-		MobclickAgent.onEvent(this, "on_low_memory");
 		if (Constants.DEBUG) {
 		    Toast.makeText(this, "low memory!", Toast.LENGTH_SHORT).show();
 		    Log.w(TAG, "low memory, will reclaim!");

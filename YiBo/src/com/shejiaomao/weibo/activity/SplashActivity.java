@@ -7,10 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-
 import com.shejiaomao.weibo.SheJiaoMaoApplication;
 import com.shejiaomao.weibo.common.Constants;
-import com.umeng.analytics.MobclickAgent;
 
 public class SplashActivity extends Activity {
     private static final String TAG = SplashActivity.class.getSimpleName();
@@ -28,13 +26,11 @@ public class SplashActivity extends Activity {
 		2000);
 		
 		super.onCreate(savedInstanceState);
-		MobclickAgent.onError(this);
-		MobclickAgent.updateOnlineConfig(this);
 
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onCreate……");
+			Log.v( TAG, "onCreate……" );
 		}
-		//意外退出时，重启，清除通知;
+		// 意外退出时，重启，清除通知;
 		NotificationManager notiManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		notiManager.cancelAll();
 
@@ -47,9 +43,8 @@ public class SplashActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onResume……");
+			Log.v( TAG, "onResume……" );
 		}
-		MobclickAgent.onResume(this);
 		this.finish();
 	}
 
@@ -57,16 +52,15 @@ public class SplashActivity extends Activity {
 	protected void onPause() {
 		super.onPause();
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onPause……");
+			Log.v( TAG, "onPause……" );
 		}
-		MobclickAgent.onPause(this);
 	}
 
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onNewIntent……");
+			Log.v( TAG, "onNewIntent……" );
 		}
 		Intent startIntent = new Intent(this, HomePageActivity.class);
 		startActivityForResult(startIntent, Constants.REQUEST_CODE_SPLASH);
@@ -75,7 +69,7 @@ public class SplashActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onActivityResult……");
+			Log.v( TAG, "onActivityResult……" );
 		}
 
 		if (resultCode == Constants.RESULT_CODE_SPLASH_EXIT) {
@@ -89,7 +83,7 @@ public class SplashActivity extends Activity {
 	protected void onStop() {
 		super.onStop();
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onStop……");
+			Log.v( TAG, "onStop……" );
 		}
 	}
 
@@ -97,7 +91,7 @@ public class SplashActivity extends Activity {
 	protected void onStart() {
 		super.onStop();
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onStart……");
+			Log.v( TAG, "onStart……" );
 		}
 	}
 
@@ -105,7 +99,7 @@ public class SplashActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		if (Constants.DEBUG) {
-			Log.v(TAG, "onDestroy……");
+			Log.v( TAG, "onDestroy……" );
 		}
 	}
 

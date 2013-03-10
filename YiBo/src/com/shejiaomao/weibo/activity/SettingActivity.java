@@ -2,12 +2,12 @@ package com.shejiaomao.weibo.activity;
 
 import java.io.File;
 import java.util.Locale;
-
+import net.dev123.yibo.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -15,18 +15,15 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.widget.EditText;
-
 import com.cattong.commons.util.StringUtil;
 import com.shejiaomao.common.ImageQuality;
 import com.shejiaomao.common.NetUtil;
-import net.dev123.yibo.R;
 import com.shejiaomao.weibo.SheJiaoMaoApplication;
 import com.shejiaomao.weibo.common.Constants;
 import com.shejiaomao.weibo.common.GlobalResource;
 import com.shejiaomao.weibo.common.GlobalVars;
 import com.shejiaomao.weibo.service.task.CacheCleanTask;
 import com.shejiaomao.weibo.service.task.ImageCacheCleanTask;
-import com.umeng.analytics.MobclickAgent;
 
 public class SettingActivity extends PreferenceActivity {
 
@@ -234,7 +231,7 @@ public class SettingActivity extends PreferenceActivity {
 		updateInterval.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				//启动service和注册接收器
+				// 启动service和注册接收器
 				Intent serviceIntent = new Intent(SettingActivity.this, AutoUpdateService.class);
 				SettingActivity.this.startService(serviceIntent);
 				return true;
@@ -436,12 +433,10 @@ public class SettingActivity extends PreferenceActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		MobclickAgent.onResume(this);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		MobclickAgent.onPause(this);
 	}
 }

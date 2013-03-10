@@ -8,13 +8,11 @@ import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.WindowManager;
-
 import com.shejiaomao.common.NetUtil;
 import com.shejiaomao.weibo.SheJiaoMaoApplication;
 import com.shejiaomao.weibo.activity.HomePageActivity;
 import com.shejiaomao.weibo.common.Constants;
 import com.shejiaomao.weibo.common.GlobalVars;
-import com.umeng.update.UmengUpdateAgent;
 
 public class InitAppTask extends AsyncTask<Void, Void, Void> {
 	private static final String TAG = InitAppTask.class.getSimpleName();
@@ -42,7 +40,7 @@ public class InitAppTask extends AsyncTask<Void, Void, Void> {
 			Log.v(TAG, "InitAppTask ... , Intent : " + context.getIntent());
 		}
 
-		//初始化
+		// 初始化
 		context.initComponents();
 		return null;
 	}
@@ -65,14 +63,12 @@ public class InitAppTask extends AsyncTask<Void, Void, Void> {
 		}
 
 		if (GlobalVars.IS_MOBILE_NET_UPDATE_VERSION) {
-			UmengUpdateAgent.setUpdateOnlyWifi(false);
 		}
 		if (shejiaomao.isCheckNewVersionOnStartup()) {
-			//检查更新
-			UmengUpdateAgent.update(context);
+			// 检查更新
 		}
 
-		//清除缓存
+		// 清除缓存
 		StatusesCleanTask statusCleanTask = new StatusesCleanTask(context);
 		statusCleanTask.execute();
 		ImageCacheQuickCleanTask imageCacheTask = new ImageCacheQuickCleanTask(context);

@@ -2,10 +2,9 @@ package com.shejiaomao.weibo.service.listener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
+import net.dev123.yibo.R;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,10 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.cattong.commons.ServiceProvider;
 import com.shejiaomao.common.CompatibilityUtil;
-import net.dev123.yibo.R;
 import com.shejiaomao.weibo.SheJiaoMaoApplication;
 import com.shejiaomao.weibo.activity.EditMicroBlogActivity;
 import com.shejiaomao.weibo.activity.GroupActivity;
@@ -39,9 +36,6 @@ import com.shejiaomao.weibo.service.task.SocialGraphTask;
 import com.shejiaomao.weibo.widget.Skeleton;
 import com.shejiaomao.weibo.widget.ValueSetEvent;
 import com.shejiaomao.weibo.widget.ViewChangeEvent;
-import com.umeng.update.UmengUpdateAgent;
-import com.umeng.update.UmengUpdateListener;
-import com.umeng.update.UpdateResponse;
 
 public class MoreChangeListener implements PropertyChangeListener {
 	private Activity context;
@@ -152,7 +146,7 @@ public class MoreChangeListener implements PropertyChangeListener {
 				LocalAccount account = sheJiaoMao.getCurrentAccount();
 				String uri = null;
 				if (account.getServiceProvider() == ServiceProvider.Fanfou) {
-					//饭否不支持通过昵称获取用户信息，这边直接设置为官方微博的id（~0jFVfHMEtG4）
+					// 饭否不支持通过昵称获取用户信息，这边直接设置为官方微博的id（~0jFVfHMEtG4）
 					uri = Constants.URI_PERSONAL_INFO.toString() + "@"
 						+ com.cattong.commons.Constants.FANFOU_OFFICAL_USER_ID;
 				} else {
@@ -205,22 +199,7 @@ public class MoreChangeListener implements PropertyChangeListener {
 			@Override
 			public void onClick(View v) {
 				final Context vContext = v.getContext();
-				final ProgressDialog progressDialog = ProgressDialog.show(
-					vContext, null, vContext.getString(R.string.msg_dialog_check_update)
-				);
-				UmengUpdateAgent.setUpdateOnlyWifi(false);
-				UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
-			    	public void onUpdateReturned(int updateStatus,UpdateResponse updateInfo) {
-			    		progressDialog.dismiss();
-			    		switch(updateStatus) {
-			    		case 0: break;
-			    		case 1: Toast.makeText(vContext, R.string.msg_is_lastest_version, Toast.LENGTH_SHORT).show(); break;
-			    		case 2: Toast.makeText(vContext, R.string.msg_check_update_time_out, Toast.LENGTH_SHORT).show(); break;
-			    		case 3: break;
-			    		}
-			    	}
-			    });
-				UmengUpdateAgent.update(vContext);
+				Toast.makeText( vContext, R.string.msg_is_lastest_version, Toast.LENGTH_SHORT ).show();
 			}
 		});
 

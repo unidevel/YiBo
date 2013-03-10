@@ -1,14 +1,13 @@
 package com.shejiaomao.weibo;
 
 import java.util.List;
-
-import com.cattong.commons.util.ListUtil;
+import net.dev123.yibo.R;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,9 +17,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
-
+import com.cattong.commons.util.ListUtil;
 import com.shejiaomao.weibo.activity.ImageViewer4GifActivity;
-import net.dev123.yibo.R;
 import com.shejiaomao.weibo.activity.SplashActivity;
 import com.shejiaomao.weibo.common.CacheManager;
 import com.shejiaomao.weibo.common.GlobalVars;
@@ -29,10 +27,9 @@ import com.shejiaomao.weibo.service.cache.ReclaimLevel;
 import com.shejiaomao.weibo.service.listener.Back2TopDoubleClickListener;
 import com.shejiaomao.weibo.service.listener.SlideFinishOnGestureListener;
 import com.shejiaomao.weibo.service.listener.SlideFinishOnGestureListener.SlideDirection;
-import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends Activity {
-	protected GestureDetector detector; //触摸监听实例
+	protected GestureDetector detector; // 触摸监听实例
 	protected SlideFinishOnGestureListener gestureListener;
 	protected SlideDirection slideDirection;
 	protected Theme theme;
@@ -59,13 +56,11 @@ public class BaseActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		MobclickAgent.onResume(this);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		MobclickAgent.onPause(this);
 	}
 
 	@Override
@@ -157,7 +152,6 @@ public class BaseActivity extends Activity {
 	public void onLowMemory() {
 		super.onLowMemory();
 		CacheManager.getInstance().reclaim(ReclaimLevel.MODERATE);
-		MobclickAgent.onEvent(this, "on_low_memory");
 	}
 
 	public Theme getSkinTheme() {

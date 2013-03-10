@@ -33,14 +33,13 @@ import com.shejiaomao.weibo.common.EmotionLoader;
 import com.shejiaomao.weibo.common.GlobalResource;
 import com.shejiaomao.weibo.common.GlobalVars;
 import com.shejiaomao.weibo.db.LocalAccount;
-import com.umeng.analytics.MobclickAgent;
 
 public class SheJiaoMaoApplication extends Application {
 
 	private static final String TAG = SheJiaoMaoApplication.class.getSimpleName();
 
-	private static String innerCachePath;        //手机内部存储缓存(由于手机内部存储有限，考虑废弃)
-	private static String sdcardCachePath;       //sdcard外部存储缓存;
+	private static String innerCachePath; // 手机内部存储缓存(由于手机内部存储有限，考虑废弃)
+	private static String sdcardCachePath; // sdcard外部存储缓存;
 	
 	private static int smallAvatarSize;
 	private static int normalAvatarSize;
@@ -306,7 +305,7 @@ public class SheJiaoMaoApplication extends Application {
 		return ImageQuality.valueOf(qualityString);
 	}
 
-	//获取缓存策略，默认为缓存5天内的数据
+	// 获取缓存策略，默认为缓存5天内的数据
 	public int getCacheStrategy() {
 		return Integer.valueOf(prefs.getString(Constants.PREFS_KEY_CACHE_STRATEGY, "5"));
 	}
@@ -338,7 +337,7 @@ public class SheJiaoMaoApplication extends Application {
 
 	/**
 	 * 获取当前帐号
-	 *
+	 * 
 	 * @return 当前帐号
 	 */
 	public LocalAccount getCurrentAccount() {
@@ -350,8 +349,9 @@ public class SheJiaoMaoApplication extends Application {
 
 	/**
 	 * 设置当前帐号
-	 *
-	 * @param currentAccount 当前帐号
+	 * 
+	 * @param currentAccount
+	 *            当前帐号
 	 */
 	public void setCurrentAccount(LocalAccount currentAccount) {
 		if (Constants.DEBUG) {
@@ -379,7 +379,7 @@ public class SheJiaoMaoApplication extends Application {
 			Constants.CONNECTION_EVICT_INTERVAL, pi
 		);
 
-		//m9时，设置成返回退出
+		// m9时，设置成返回退出
 		if (!prefs.contains(Constants.PREFS_KEY_EXIT_ON_BACK)) {
 			String model = CompatibilityUtil.getModel();
 			if (StringUtil.isNotEmpty(model)
@@ -436,8 +436,8 @@ public class SheJiaoMaoApplication extends Application {
 			GlobalVars.NET_OPERATOR = NetworkOperator.UNKOWN;
 		}
 
-    	String isObeySinaAgreement = MobclickAgent.getConfigParams(this, "IS_OBEY_SINA_AGREEMENT");
-    	String isMobileNetUpdateVersion = MobclickAgent.getConfigParams(this, "IS_MOBILE_NET_UPDATE_VERSION");
+		String isObeySinaAgreement = "";
+		String isMobileNetUpdateVersion = "";
         GlobalVars.IS_OBEY_SINA_AGREEMENT = Boolean.parseBoolean(isObeySinaAgreement);
         GlobalVars.IS_MOBILE_NET_UPDATE_VERSION = Boolean.parseBoolean(isMobileNetUpdateVersion);
         if (Constants.DEBUG) Log.d(TAG, "IS_OBEY_SINA_AGREEMENT=" + isObeySinaAgreement);
@@ -463,7 +463,7 @@ public class SheJiaoMaoApplication extends Application {
     	if (context == null) {
     		return;
     	}
-		//时间表示;
+		// 时间表示;
 		TimeSpanUtil.timeFormatWithinSeconds = " " +  context.getString(R.string.label_time_format_within_seconds);
 		TimeSpanUtil.timeFormatHalfMinuteAgo = " " + context.getString(R.string.label_time_format_half_minute_ago);
 		TimeSpanUtil.timeFormatWithinOneMinute = " " + context.getString(R.string.label_time_format_within_one_minute);
@@ -487,7 +487,7 @@ public class SheJiaoMaoApplication extends Application {
 		Display display = windowManager.getDefaultDisplay();
 		displayWidth = display.getWidth();
 	    displayHeight = display.getHeight();
-	    //使用display.getOrientation() 判断横竖屏不准确
+		// 使用display.getOrientation() 判断横竖屏不准确
 		if (displayWidth > displayHeight) {
 		    displayWidth = display.getHeight();
 		    displayHeight = display.getWidth();
