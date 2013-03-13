@@ -8,9 +8,14 @@ public class SinaOAuthConfig extends OAuthConfigBase {
 
 	public SinaOAuthConfig() {		
 		this.setAuthVersion(Authorization.AUTH_VERSION_OAUTH_2);
-		this.setConsumerKey("834484950");//YiBo微博客户端
-		this.setConsumerSecret("ff6bb46717f98d7d360459abd0a654f9");
+		// this.setConsumerKey("834484950");//YiBo微博客户端
+		// this.setConsumerSecret("ff6bb46717f98d7d360459abd0a654f9");
+		// this.setCallbackUrl("http://www.yibo.me/authorize/getAccessToken.do");
+
+		this.setConsumerKey( "2714571418" );// YiBo微博客户端
+		this.setConsumerSecret( "0601381ea5428ee8985b52d1c330db3c" );
 		this.setCallbackUrl("http://www.yibo.me/authorize/getAccessToken.do");
+
 //		this.setConsumerKey("2849184197");//ipad
 //		this.setConsumerSecret("7338acf99a00412983f255767c7643d0");
 //		this.setCallbackUrl("https://api.weibo.com/oauth2/default.html");
